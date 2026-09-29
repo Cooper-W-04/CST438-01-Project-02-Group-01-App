@@ -1,15 +1,50 @@
+# Secrets
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+google-services.json
+**/src/main/resources/application-local.*
+**/src/main/resources/application-secret*.*
+
+# Gradle / build output
+.gradle/
+build/
+target/
+out/
+bin/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Kotlin / Java
+*.class
+*.log
+.kotlin/
+hs_err_pid*
+replay_pid*
+
+# Android
+*.apk
+*.aab
+*.ap_
+*.dex
+captures/
+.externalNativeBuild/
+.cxx/
+app/release/
+
+# IDEs
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+*.ipr
+*.iws
+.vscode/
+.fleet/
+*.swp
+
+# Node tools
+node_modules/
+
+# OS files
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
+Thumbs.db
