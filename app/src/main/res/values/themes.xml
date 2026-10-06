@@ -2,4 +2,13 @@
 <resources>
 
     <style name="Theme.CST43801Project02Group01App" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.CST43801Project02Group01App.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.CST43801Project02Group01App.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.CST43801Project02Group01App.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
