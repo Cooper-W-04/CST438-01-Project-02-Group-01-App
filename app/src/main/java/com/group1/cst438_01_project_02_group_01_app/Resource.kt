@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.group1.cst438_01_project_02_group_01_app.ui.theme.CST43801Project02Group01AppTheme
 
 class Resource : ComponentActivity() {
@@ -26,7 +27,8 @@ class Resource : ComponentActivity() {
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
                     )
-                    Button(onClick = {
+                    Button(modifier = Modifier
+                        .padding(top = 10.dp, bottom = 10.dp),onClick = {
                         startActivity(Intent(this@Resource, MainActivity::class.java))
                     }) { Text("Submit") }
                 }
