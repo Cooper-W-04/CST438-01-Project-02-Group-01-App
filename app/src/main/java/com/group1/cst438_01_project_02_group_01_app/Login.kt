@@ -29,9 +29,16 @@ class Login : ComponentActivity() {
         setContent {
             CST43801Project02Group01AppTheme {
                 Holder()
+                val isAdmin = false
+                val mainIntent = Intent(this@Login, MainActivity::class.java)
+                val adminIntent = Intent(this@Login, Admin::class.java)
                 Button(modifier = Modifier
                     .padding(top = 10.dp, bottom = 10.dp),onClick = {
-                    startActivity(Intent(this@Login, MainActivity::class.java))
+                        if(isAdmin){
+                            startActivity(adminIntent)
+                        }else{
+                            startActivity(mainIntent)
+                        }
                 }) { Text("Login With Google") }
             }
         }

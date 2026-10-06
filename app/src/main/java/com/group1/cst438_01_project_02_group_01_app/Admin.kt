@@ -40,7 +40,7 @@ class Admin : ComponentActivity() {
 @Composable
 fun Greeting2(name: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!",
+        text = "Die $name!",
         modifier = modifier
     )
 }
