@@ -49,24 +49,30 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier.padding(vertical = 4.dp),
                             onClick = {
                                 intent.putExtra("TYPE", "PostGroup")
+                                //Default value
+                                intent.putExtra("GROUPNAME", "Pizza Party")
                                 startActivity(intent)
                             }) { Text("Post Group") }
                         Button(
                             modifier = Modifier.padding(vertical = 4.dp),
                             onClick = {
                                 intent.putExtra("TYPE", "EditGroup")
+                                //Value pulled from somehwhere else to be edited
+                                intent.putExtra("GROUPNAME", "Villain Club")
                                 startActivity(intent)
                             }) { Text("Edit Group") }
                         Button(
                             modifier = Modifier.padding(vertical = 4.dp),
                             onClick = {
                                 intent.putExtra("TYPE", "PostTime")
+                                intent.putExtra("TIME", "Mon8-10 Tue14 Thu12-14")
                                 startActivity(intent)
                             }) { Text("Post Time") }
                         Button(
                             modifier = Modifier.padding(vertical = 4.dp),
                             onClick = {
                                 intent.putExtra("TYPE", "EditTime")
+                                intent.putExtra("TIME", "Fri16-18")
                                 startActivity(intent)
                             }) { Text("Edit Time") }
                     }

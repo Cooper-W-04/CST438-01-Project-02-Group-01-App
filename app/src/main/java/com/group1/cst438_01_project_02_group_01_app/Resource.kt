@@ -6,12 +6,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -28,11 +26,13 @@ class Resource : ComponentActivity() {
             CST43801Project02Group01AppTheme {
                 Column() {
                     //Get the information from the intent to see what stuff to put up.
-                    val Type = intent.getStringExtra("TYPE")
-                    if(Type.equals("EditGroup") || Type.equals("PostGroup")){
-                        GroupUI()
-                    }else if(Type.equals("EditTime")|| Type.equals("PostTime")){
-                        TimeUI()
+                    val type = intent.getStringExtra("TYPE")
+                    if(type.equals("EditGroup") || type.equals("PostGroup")){
+                        val group = intent.getStringExtra("GROUPNAME")
+                        GroupUI(group)
+                    }else if(type.equals("EditTime")|| type.equals("PostTime")){
+                        val times = intent.getStringExtra("TIME")
+                        TimeUI(times)
                     }
                     //Based on the information from the intent change what the button does
                     Button(
@@ -47,9 +47,9 @@ class Resource : ComponentActivity() {
 }
 
 @Composable
-fun GroupUI(){
+fun GroupUI(groupName: String?){
     Column() {Text("Group UI")
-        OutlinedTextField(value = "Pizza Party",
+        OutlinedTextField(value = groupName.toString(),
             onValueChange = {groupAlter()},
             label = { Text(text = "Group Name", fontFamily = FontFamily.Monospace, color = MaterialTheme.colorScheme.secondary) },
             singleLine = true,)
@@ -57,13 +57,13 @@ fun GroupUI(){
 }
 
 @Composable
-fun TimeUI(){
+fun TimeUI(times: String?){
     Column() {Text("Time UI")
         //This info will get converted into the time slices object eventually with
         //the number being the hour multiplied by the day.
-            OutlinedTextField(value = "Time",
+            OutlinedTextField(value = times.toString(),
                 onValueChange = {groupAlter()},
-                label = { Text(text = "Mon12-16 Thur14", fontFamily = FontFamily.Monospace, color = MaterialTheme.colorScheme.secondary) },
+                label = { Text(text = "Time Slices", fontFamily = FontFamily.Monospace, color = MaterialTheme.colorScheme.secondary) },
                 singleLine = true,)
         }
 
