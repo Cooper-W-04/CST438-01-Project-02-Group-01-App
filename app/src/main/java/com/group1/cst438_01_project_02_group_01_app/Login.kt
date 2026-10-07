@@ -29,7 +29,7 @@ class Login : ComponentActivity() {
         setContent {
             CST43801Project02Group01AppTheme {
                 Holder()
-                val isAdmin = true
+                val isAdmin = false
                 val mainIntent = Intent(this@Login, MainActivity::class.java)
                 val adminIntent = Intent(this@Login, Admin::class.java)
                 Button(modifier = Modifier

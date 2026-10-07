@@ -49,9 +49,9 @@ class Resource : ComponentActivity() {
 @Composable
 fun GroupUI(){
     Column() {Text("Group UI")
-        OutlinedTextField(value = "Blah",
+        OutlinedTextField(value = "Pizza Party",
             onValueChange = {groupAlter()},
-            label = { Text(text = "Username", fontFamily = FontFamily.Monospace, color = MaterialTheme.colorScheme.secondary) },
+            label = { Text(text = "Group Name", fontFamily = FontFamily.Monospace, color = MaterialTheme.colorScheme.secondary) },
             singleLine = true,)
     }
 }
@@ -59,9 +59,11 @@ fun GroupUI(){
 @Composable
 fun TimeUI(){
     Column() {Text("Time UI")
-            OutlinedTextField(value = "Blah",
+        //This info will get converted into the time slices object eventually with
+        //the number being the hour multiplied by the day.
+            OutlinedTextField(value = "Time",
                 onValueChange = {groupAlter()},
-                label = { Text(text = "Username", fontFamily = FontFamily.Monospace, color = MaterialTheme.colorScheme.secondary) },
+                label = { Text(text = "Mon12-16 Thur14", fontFamily = FontFamily.Monospace, color = MaterialTheme.colorScheme.secondary) },
                 singleLine = true,)
         }
 
