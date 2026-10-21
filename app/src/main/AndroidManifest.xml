@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--
+        Local development uses HTTP and requires network access.
+        When the API is deployed to Render, use its HTTPS URL instead and
+        remove any local cleartext-traffic configuration before production.
+    -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
