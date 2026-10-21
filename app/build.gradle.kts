@@ -3,6 +3,12 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+// Override locally with: -PapiBaseUrl=http://YOUR_LAN_IP:8080/
+// Production builds should use the Render HTTPS URL instead.
+val apiBaseUrl = providers.gradleProperty("apiBaseUrl")
+    .orElse("http://10.0.2.2:8080/")
+    .get()
+
 android {
     namespace = "com.group1.cst438_01_project_02_group_01_app"
     compileSdk {
@@ -15,6 +21,8 @@ android {
         targetSdk = 37
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -32,6 +40,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
