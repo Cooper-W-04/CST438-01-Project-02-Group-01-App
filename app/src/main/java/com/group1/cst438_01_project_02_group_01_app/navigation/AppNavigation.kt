@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.group1.cst438_01_project_02_group_01_app.composable.admin.AdminScreen
+import com.group1.cst438_01_project_02_group_01_app.composable.components.LoadingScreen
 import com.group1.cst438_01_project_02_group_01_app.composable.home.HomeScreen
 import com.group1.cst438_01_project_02_group_01_app.composable.login.LoginScreen
 import com.group1.cst438_01_project_02_group_01_app.composable.resource.ResourceScreen
@@ -17,6 +18,7 @@ fun AppNavigation(authViewModel: AuthViewModel) {
     var currentScreen by remember { mutableStateOf<AppScreen>(AppScreen.Home) }
 
     when (authViewModel.authState) {
+        AuthState.Loading -> LoadingScreen()
         AuthState.LoggedOut -> LoginScreen(onSignInClick = authViewModel::signInForPreview)
         AuthState.LoggedIn -> when (val screen = currentScreen) {
             AppScreen.Home -> HomeScreen(
