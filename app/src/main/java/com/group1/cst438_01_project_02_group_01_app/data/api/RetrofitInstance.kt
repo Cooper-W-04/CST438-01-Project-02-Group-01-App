@@ -33,4 +33,8 @@ object RetrofitInstance {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+    val schedulerApi: SchedulerApi by lazy {
+        retrofit.create(SchedulerApi::class.java)
+    }
 }
