@@ -24,9 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CST43801Project02Group01App">
         <activity
-            android:name=".Login"
+            android:name=".MainActivity"
             android:exported="true"
-            android:label="Login"
+            android:label="@string/app_name"
             android:theme="@style/Theme.CST43801Project02Group01App"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -42,9 +42,9 @@
             android:theme="@style/Theme.CST43801Project02Group01App"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Login"
             android:exported="false"
-            android:label="@string/title_activity_resource"
+            android:label="Login"
             android:theme="@style/Theme.CST43801Project02Group01App"
             android:windowSoftInputMode="adjustResize" />
         <activity
