@@ -25,117 +25,19 @@ import com.group1.cst438_01_project_02_group_01_app.ui.theme.CST43801Project02Gr
 import com.group1.cst438_01_project_02_group_01_app.viewModels.AuthViewModel
 
 class MainActivity : ComponentActivity() {
+    private val authManager = AuthManager()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             CST43801Project02Group01AppTheme {
-                val hours = ArrayList<ArrayList<Int>>()
-
-                //Setting up the list with empty values
-                repeat(24){
-                    val row = ArrayList<Int>()
-                    repeat(7){
-                        row.add(0)
-                    }
-                    hours.add(row)
-                }
-
-                Column(modifier = Modifier.fillMaxSize()) {
-
-                    Box(modifier = Modifier.weight(1f)) {
-                        CalendarUI(hours)
-                    }
-                    Column(modifier = Modifier.weight(1f)) {
-                        val intent = Intent(this@MainActivity, Resource::class.java)
-                        Button(
-                            modifier = Modifier.padding(vertical = 4.dp),
-                            onClick = {
-                                intent.putExtra("TYPE", "PostGroup")
-                                //Default value
-                                intent.putExtra("GROUPNAME", "Pizza Party")
-                                startActivity(intent)
-                            }) { Text("Post Group") }
-                        Button(
-                            modifier = Modifier.padding(vertical = 4.dp),
-                            onClick = {
-                                intent.putExtra("TYPE", "EditGroup")
-                                //Value pulled from somehwhere else to be edited
-                                intent.putExtra("GROUPNAME", "Villain Club")
-                                startActivity(intent)
-                            }) { Text("Edit Group") }
-                        Button(
-                            modifier = Modifier.padding(vertical = 4.dp),
-                            onClick = {
-                                intent.putExtra("TYPE", "PostTime")
-                                intent.putExtra("TIME", "Mon8-10 Tue14 Thu12-14")
-                                startActivity(intent)
-                            }) { Text("Post Time") }
-                        Button(
-                            modifier = Modifier.padding(vertical = 4.dp),
-                            onClick = {
-                                intent.putExtra("TYPE", "EditTime")
-                                intent.putExtra("TIME", "Fri16-18")
-                                startActivity(intent)
-                            }) { Text("Edit Time") }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun CalendarUI(hours: ArrayList<ArrayList<Int>>) {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Text("Main Page", fontSize = 30.sp)
-
-        Row(modifier = Modifier.fillMaxWidth()) {
-            listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun").forEach { day ->
-                Text(
-                    text = day,
-                    fontSize = 11.sp,
-                    modifier = Modifier.weight(1f),
-                    textAlign = TextAlign.Center
+                val authViewModel: AuthViewModel = viewModel(
+                    factory = AuthViewModel.factory(authManager)
                 )
+                AppNavigation(authViewModel)
             }
         }
-
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-        ) {
-            items(24) { i ->
-                HourRow(hours, i)
-            }
-        }
-    }
-}
-
-@Composable
-fun HourRow(hours: ArrayList<ArrayList<Int>>, rowNumber: Int) {
-    Row(modifier = Modifier.fillMaxWidth().height(16.dp)) {
-        for (i in 0..6) {
-            Text(
-                text = hours[rowNumber][i].toString(),
-                fontSize = 11.sp,
-                modifier = Modifier.weight(1f),
-                textAlign = TextAlign.Center
-            )
-        }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(text = "Main Page", modifier = modifier)
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview4() {
-    CST43801Project02Group01AppTheme {
-        Greeting("Android")
     }
 }
