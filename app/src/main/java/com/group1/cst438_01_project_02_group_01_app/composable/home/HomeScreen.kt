@@ -6,8 +6,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,27 +18,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.group1.cst438_01_project_02_group_01_app.data.model.TimeSlotDto
+import com.group1.cst438_01_project_02_group_01_app.viewModels.HomeUiState
 
 @Composable
 fun HomeScreen(
+    uiState: HomeUiState,
+    onRetryClick: () -> Unit,
     onSignOutClick: () -> Unit,
     onResourceClick: (type: String, value: String) -> Unit = { _, _ -> },
     onAdminClick: () -> Unit = {}
 ) {
-    val hours = List(24) { List(7) { 0 } }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        CalendarUI(
-            hours = hours,
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-        )
+        Text("Main Page", fontSize = 30.sp)
+        TimeSlotsContent(uiState, onRetryClick, Modifier.weight(1f))
 
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -60,6 +61,46 @@ fun HomeScreen(
                 Text("Sign out")
             }
         }
+    }
+}
+
+@Composable
+private fun TimeSlotsContent(
+    uiState: HomeUiState,
+    onRetryClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        when (uiState) {
+            HomeUiState.Loading -> {
+                CircularProgressIndicator()
+                Text("Loading time slots...")
+            }
+            is HomeUiState.Error -> {
+                Text("Could not load time slots: ${uiState.message}")
+                Button(onClick = onRetryClick) { Text("Retry") }
+            }
+            is HomeUiState.Success -> {
+                Text("Time slots returned: ${uiState.timeSlots.size}")
+                LazyColumn(modifier = Modifier.fillMaxWidth()) {
+                    items(uiState.timeSlots.size) { index ->
+                        TimeSlotRow(uiState.timeSlots[index])
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun TimeSlotRow(timeSlot: TimeSlotDto) {
+    Row(modifier = Modifier.fillMaxWidth()) {
+        Text("Day ${timeSlot.dayOfWeek}", modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.width(8.dp))
+        Text("${timeSlot.startHour}:00 - ${timeSlot.endHour}:00")
     }
 }
 
